@@ -1,0 +1,20 @@
+{
+  "testcases": {
+    "test_addition": {
+      "action": "add",
+      "arguments": {
+        "a": 2,
+        "b": 3
+      },
+      "result": 5
+    },
+    "test_addition_fails": {
+      "action": "add",
+      "arguments": {
+        "a": 2,
+        "b": 3
+      },
+      "result": 4
+    }
+  }
+}

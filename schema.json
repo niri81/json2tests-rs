@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.github.com/niri81/json2tests-rs/schema.json",
+  "title": "Test Vectors",
+  "description": "Given test vector input for kauma application",
+  "type": "object",
+  "properties": {
+    "testvector": {
+      "description": "One test vector containing all necessary data for one test",
+      "type": "object",
+      "properties": {
+        "action": { "type": "string" },
+        "arguments": { "type": "object", "additionalProperties": true }
+      }
+    }
+  }
+}
