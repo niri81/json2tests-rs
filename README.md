@@ -16,7 +16,21 @@ serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 ```
 
-Please note that this macro is not yet available via `cargo add`, you need to clone the repository and specify the local path!
+Or if you want to add it via `cargo add` you can follow [this](https://git.philslr.de/rustpackages/-/packages/cargo/json2tests/0.1.0) instruction to set it up:
+
+```toml
+[registries.philslr]
+index = "sparse+https://git.philslr.de/api/packages/rustpackages/cargo/" # Sparse index
+# index = "https://git.philslr.de/rustpackages/_cargo-index.git" # Git
+
+[net]
+git-fetch-with-cli = true
+```
+
+And voilà! You can simply add `json2tests` to your project with:
+```bash
+$ cargo add json2tests --registry philslr
+```
 
 ## Usage
 
