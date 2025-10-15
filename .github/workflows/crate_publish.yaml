@@ -1,0 +1,33 @@
+name: Publish as crate on Forgejo
+on:
+  workflow_dispatch:
+  push:
+    tags:
+     - 'v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+      
+      - name: Install rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+
+      - name: Configure registry
+        run: |
+          mkdir -p ~/.cargo
+          echo '[registries.philslr]' >> ~/.cargo/config.toml
+          echo 'index = "'${{ secrets.FORGEJO_INDEX }}'"' >> ~/.cargo/config.toml
+          echo '[registry]' >> ~/.cargo/config.toml
+          echo 'global-credential-providers = ["cargo:token"]' >> ~/.cargo/config.toml
+
+      - name: Add token for registry
+        run: |
+          echo '[registries.philslr]' >> ~/.cargo/credentials.toml
+          echo 'token = "Bearer '${{ secrets.FORGEJO_INDEX_TOKEN }}'"' >> ~/.cargo/credentials.toml
+
+      - name: Publish crate
+        run: cargo publish --registry philslr
+
