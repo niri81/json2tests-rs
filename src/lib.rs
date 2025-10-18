@@ -67,12 +67,11 @@ pub fn json2tests(input: TokenStream) -> TokenStream {
     };
 
     for (test_name, test_data) in json.testcases {
-        let test_ident: syn::Ident;
-        if Uuid::parse_str(&test_name).is_ok() {
-            test_ident = format_ident!("uuid_{}", test_name.replace("-", "_"));
+        let test_ident = if Uuid::parse_str(&test_name).is_ok() {
+            format_ident!("uuid_{}", test_name.replace('-', "_"))
         } else {
-            test_ident = format_ident!("{}", test_name);
-        }
+            format_ident!("{}", test_name)
+        };
 
         let action = LitStr::new(&test_data.action, test_ident.span());
         let arguments = LitStr::new(&test_data.arguments.to_string(), test_ident.span());
