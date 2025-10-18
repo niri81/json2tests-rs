@@ -36,7 +36,7 @@ mod test {
 Generate tests from JSON takes a file path as input and will invoke a `run()` function for each testcase contained in the JSON. Your `run` function needs to be defined as follows:
 
 ```rs
-fn run(action: &str, args: serde_json::Value) -> Result<serde_json::Value, impl std::err::Error>;
+fn run(action: &str, args: serde_json::Value) -> Result<serde_json::Value, impl std::error::Error>;
 ```
 
 > [!NOTE]
