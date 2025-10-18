@@ -22,7 +22,7 @@ fn run(action: &str, args: Value) -> Result<Value> {
 #[cfg(test)]
 mod test {
     use super::*;
-    use json_to_test::generate_tests_from_json;
+    use json2tests::json2tests;
 
-    json2tests!("tests.json");
+    json2tests!("examples/default_tests.json");
 }
