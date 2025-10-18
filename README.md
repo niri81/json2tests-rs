@@ -11,9 +11,10 @@ Add the following to your `Cargo.toml` (if not already in it):
 ```toml
 [packages]
 assert-json-diff = "2.0"
-json_to_test = { version = "0.1.0", path = "YOUR_PATH" }
+json2test = { version = "0.1.0", path = "YOUR_PATH" }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
+uuid = "1.0"
 ```
 
 Please note that this macro is not yet available via `cargo add`, you need to clone the repository and specify the local path!
@@ -26,9 +27,9 @@ Add the following to your source code:
 #[cfg(test)]
 mod test {
     use super::*;
-    use json_to_test::generate_tests_from_json;
+    use json2tests::json2tests;
 
-    generate_tests_from_json!(file_path)
+    json2tests!(file_path)
 }
 ```
 
@@ -73,7 +74,7 @@ will generate the following code, when implemented as described in [Usage](#usag
 ```rs
 mod test {
     use super::*;
-    use json_to_test::generate_tests_from_json;
+    use json2tests::json2tests;
     extern crate test;
     #[rustc_test_marker = "test::test_addition"]
     #[doc(hidden)]
