@@ -1,9 +1,15 @@
 [package]
 name = "json2tests"
+description = "Macro to generate your Rust tests from a provided JSON file"
 version = "0.2.0"
 edition = "2024"
 authors = ["niri81"]
+homepage = "https://github.com/niri81/json2tests-rs/"
 repository = "https://github.com/niri81/json2tests-rs/"
+license-file = "LICENSE"
+readme = "README.md"
+categories = ["development-tools::testing"]
+keywords = ["testing", "json", "test-generation"]
 
 [lib]
 proc-macro = true
