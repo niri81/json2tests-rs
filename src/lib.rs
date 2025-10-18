@@ -5,6 +5,7 @@ use std::{
     path::PathBuf,
 };
 use syn::{LitStr, parse_macro_input};
+use uuid::Uuid;
 
 mod types;
 
@@ -42,11 +43,17 @@ pub fn json2tests(input: TokenStream) -> TokenStream {
     };
 
     for (test_name, test_data) in json.testcases {
-        let test_name = format_ident!("{}", test_name);
-        let action = LitStr::new(&test_data.action, test_name.span());
-        let arguments = LitStr::new(&test_data.arguments.to_string(), test_name.span());
+        let test_ident: syn::Ident;
+        if Uuid::parse_str(&test_name).is_ok() {
+            test_ident = format_ident!("uuid_{}", test_name.replace("-", "_"));
+        } else {
+            test_ident = format_ident!("{}", test_name);
+        }
+
+        let action = LitStr::new(&test_data.action, test_ident.span());
+        let arguments = LitStr::new(&test_data.arguments.to_string(), test_ident.span());
         let compare_results = test_data.result.map(|r| {
-            let result_lit = LitStr::new(&r.to_string(), test_name.span());
+            let result_lit = LitStr::new(&r.to_string(), test_ident.span());
 
             quote! {
                 let expected_result: serde_json::Value = serde_json::from_str(#result_lit).unwrap();
@@ -56,7 +63,7 @@ pub fn json2tests(input: TokenStream) -> TokenStream {
 
         let test_code = quote! {
             #[test]
-            fn #test_name() {
+            fn #test_ident() {
                 let value = serde_json::from_str(#arguments).unwrap();
 
                 let result = run(#action, value);

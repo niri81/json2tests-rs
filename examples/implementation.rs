@@ -25,4 +25,5 @@ mod test {
     use json2tests::json2tests;
 
     json2tests!("examples/default_tests.json");
+    json2tests!("examples/uuid_tests.json");
 }

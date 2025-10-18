@@ -1,0 +1,20 @@
+{
+  "testcases": {
+    "7ae90e1d-edbf-4576-8e40-d2dbe9225651": {
+      "action": "add",
+      "arguments": {
+        "a": 2,
+        "b": 3
+      },
+      "result": 5
+    },
+    "e2e2a592-0e18-4995-95c1-41b1a5e3a3ce": {
+      "action": "add",
+      "arguments": {
+        "a": 2,
+        "b": 3
+      },
+      "result": 4
+    }
+  }
+}
