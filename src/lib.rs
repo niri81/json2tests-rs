@@ -9,6 +9,30 @@ use uuid::Uuid;
 
 mod types;
 
+/// Generates tests from JSON file specified as argument (relative to
+/// `Cargo.toml`). The JSON must match the [predefined schema](https://raw.githubusercontent.com/niri81/json2tests-rs/refs/heads/main/schema.json).
+///
+/// This macro will always invoke a `run` function requiring the following
+/// specification, passing the action and all provided arguments:
+/// ```ignore
+/// fn run(action: &str, args: serde_json::Value) -> Result<serde_json::Value, impl std::error::Error>;
+/// ```
+/// The returned JSON value must then be `Ok` and match the expected result from
+/// the provided JSON file.
+///
+/// # Usage
+///
+/// ```ignore
+/// #[cfg(test)]
+/// mod test {
+///     use super::*;
+///     use json2tests::json2tests;
+///
+///     json2tests!("examples/default_tests.json");
+/// }
+/// ```
+///
+/// For further information, check the [GitHub repository](https://github.com/niri81/json2tests-rs/).
 #[proc_macro]
 pub fn json2tests(input: TokenStream) -> TokenStream {
     let json_path = PathBuf::from(parse_macro_input!(input as LitStr).value());
