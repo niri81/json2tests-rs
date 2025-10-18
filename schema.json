@@ -1,17 +1,36 @@
 {
-  "$schema": "https://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.github.com/niri81/json2tests-rs/schema.json",
-  "title": "Test Vectors",
-  "description": "Given test vector input for kauma application",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/niri81/json2tests-rs/refs/heads/main/schema.json",
+  "title": "Test Cases Schema",
+  "description": "Schema for a collection of named test vectors.",
   "type": "object",
   "properties": {
-    "testvector": {
-      "description": "One test vector containing all necessary data for one test",
+    "testcases": {
+      "description": "An object where keys are the test names and values are the test vectors.",
       "type": "object",
-      "properties": {
-        "action": { "type": "string" },
-        "arguments": { "type": "object", "additionalProperties": true }
-      }
+      "additionalProperties": {
+        "title": "Test Vector",
+        "type": "object",
+        "properties": {
+          "action": {
+            "description": "The operation to be performed, e.g., 'add'.",
+            "type": "string"
+          },
+          "arguments": {
+            "description": "The input data for the action.",
+            "additionalProperties": true
+          },
+          "result": {
+            "description": "The expected result of the action.",
+            "type": "number"
+          }
+        },
+        "required": ["action", "result"],
+        "additionalProperties": false
+      },
+      "minProperties": 1
     }
-  }
+  },
+  "required": ["testcases"],
+  "additionalProperties": false
 }
