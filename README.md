@@ -2,7 +2,11 @@
 
 The macro provided in this crate allows for generating test cases from a given JSON file following the schema defined in [schema.json](schema.json).
 
-The [example](example) crate shows how to implement the macro in your source code. Notice how you can just run `cargo test` in this directory and the test from the JSON file is executed.
+The [example code](examples/implementation.rs) shows how to use the macro. Notice how you can run `cargo test` for this example and the tests from the JSON files are executed.
+
+```sh
+cargo test --example implementation
+```
 
 ## Requirements
 
