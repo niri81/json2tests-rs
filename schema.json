@@ -29,7 +29,7 @@
             "type": ["boolean", "string"]
           }
         },
-        "required": ["action", "result"],
+        "required": ["action"],
         "additionalProperties": false
       },
       "minProperties": 1
