@@ -6,6 +6,7 @@ pub struct TestCase {
     pub action: String,
     pub arguments: Value,
     pub result: Option<Value>,
+    pub panic: Option<Value>,
 }
 
 #[derive(Debug, Deserialize)]

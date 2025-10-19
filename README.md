@@ -54,6 +54,28 @@ fn run(action: &str, args: serde_json::Value) -> Result<serde_json::Value, impl 
 > }
 > ```
 
+### Panics
+
+You can specify that your code is expected to panic by setting the `panic` property in the JSON file. This will add the `#[should_panic]` attribute to the test.
+
+```json
+{
+  "testcases": {
+    "test_addition": {
+      "action": "add",
+      "arguments": {
+        "a": 2,
+        "b": 3
+      },
+      "result": 4,
+      "panic": true
+    }
+  }
+}
+```
+
+When the `panic` property is set to a string, it will be matched against the panic message using the `#[should_panic(expected = "...")]` attribute.
+
 ## Example
 
 This JSON script

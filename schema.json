@@ -23,6 +23,10 @@
           "result": {
             "description": "The expected result of the action.",
             "type": "number"
+          },
+          "panic": {
+            "description": "The test is expected to panic. When supplied with a string, the panic message will be checked against it.",
+            "type": ["boolean", "string"]
           }
         },
         "required": ["action", "result"],

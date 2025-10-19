@@ -14,7 +14,17 @@
         "a": 2,
         "b": 3
       },
-      "result": 4
+      "result": 4,
+      "panic": true
+    },
+    "test_addition_fails_with_message": {
+      "action": "add",
+      "arguments": {
+        "a": "a",
+        "b": 3
+      },
+      "result": 4,
+      "panic": "called `Option::unwrap()` on a `None` value"
     }
   }
 }

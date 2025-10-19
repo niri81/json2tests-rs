@@ -83,9 +83,27 @@ pub fn json2tests(input: TokenStream) -> TokenStream {
                 ::assert_json_diff::assert_json_eq!(result.unwrap(), expected_result)
             }
         });
+        let should_panic = test_data.panic.map(|v| {
+            if let Some(b) = v.as_bool()
+                && b
+            {
+                quote! {
+                    #[should_panic]
+                }
+            } else if let Some(s) = v.as_str() {
+                let msg = LitStr::new(s, test_ident.span());
+
+                quote! {
+                    #[should_panic(expected = #msg)]
+                }
+            } else {
+                quote! {}
+            }
+        });
 
         let test_code = quote! {
             #[test]
+            #should_panic
             fn #test_ident() {
                 let value = serde_json::from_str(#arguments).unwrap();
 
