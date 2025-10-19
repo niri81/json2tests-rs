@@ -21,8 +21,7 @@
             "additionalProperties": true
           },
           "result": {
-            "description": "The expected result of the action.",
-            "type": "number"
+            "description": "The expected result of the action."
           },
           "panic": {
             "description": "The test is expected to panic. When supplied with a string, the panic message will be checked against it.",
