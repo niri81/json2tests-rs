@@ -70,7 +70,7 @@ pub fn json2tests(input: TokenStream) -> TokenStream {
         let test_ident = if Uuid::parse_str(&test_name).is_ok() {
             format_ident!("uuid_{}", test_name.replace('-', "_"))
         } else {
-            format_ident!("{}", test_name)
+            format_ident!("{}", test_name.replace('-', "_"))
         };
 
         let action = LitStr::new(&test_data.action, test_ident.span());
